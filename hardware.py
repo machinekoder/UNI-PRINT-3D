@@ -224,13 +224,13 @@ def setup_smartplugs():
     # first smartplug - machine power
     address = "10.0.0.8"
     name = "smartplug-power"
-    smartplug = hal.loadusr('./hal_smartplug.py -n %s -e -a %s' % (name, address), wait_name=name)
+    smartplug = hal.loadusr('hal_smartplug -n %s -e -a %s' % (name, address), wait_name=name)
 
     smartplug.pin('enable').link('motion.digital-out-io-15')
 
     # second smartplug - fan control
     address = "10.0.0.7"
     name = "smartplug-fan"
-    smartplug = hal.loadusr('./hal_smartplug.py -n %s -e -a %s' % (name, address), wait_name=name)
+    smartplug = hal.loadusr('hal_smartplug -n %s -a %s' % (name, address), wait_name=name)
 
     smartplug.pin('enable').link('motion.digital-out-io-16')
