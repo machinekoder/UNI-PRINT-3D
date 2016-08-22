@@ -218,3 +218,19 @@ def setup_hbp_led(thread):
 def setup_exp(name):
     hal.newsig('%s-pwm' % name, hal.HAL_FLOAT, init=0.0)
     hal.newsig('%s-enable' % name, hal.HAL_BIT, init=False)
+
+
+def setup_smartplugs():
+    # first smartplug - machine power
+    address = "10.0.0.8"
+    name = "smartplug-power"
+    smartplug = hal.loadusr('./hal_smartplug.py -n %s -e -a %s' % (name, address), wait_name=name)
+
+    smartplug.pin('enable').link('motion.digital-out-io-15')
+
+    # second smartplug - fan control
+    address = "10.0.0.7"
+    name = "smartplug-fan"
+    smartplug = hal.loadusr('./hal_smartplug.py -n %s -e -a %s' % (name, address), wait_name=name)
+
+    smartplug.pin('enable').link('motion.digital-out-io-16')
